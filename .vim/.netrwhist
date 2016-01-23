@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/joao/src/Finance-provisioning/puppet/modules/users/files'
+let g:netrw_dirhist_2='/home/joao/src/Finance-provisioning/puppet/modules/apache/manifests/vhost'
+let g:netrw_dirhist_3='/home/joao/src/Finance-provisioning/build_packages/perl/specs'
+let g:netrw_dirhist_4='/home/joao/src/fx/Finance-HostedTrader/bin'
+let g:netrw_dirhist_5='/home/joao/src/fx/Finance-HostedTrader'
+let g:netrw_dirhist_6='/home/joao/src/fx/Finance-provisioning/puppet/modules/zonalivre_repo/templates'
+let g:netrw_dirhist_7='/home/joao/veewee/templates/Fedora-17-x86_64'
+let g:netrw_dirhist_8='/home/joao/src/fx/Finance-HostedTrader/.git'
+let g:netrw_dirhist_9='/home/joao/Desktop/HTTP-Proxy-0.25/eg/flv'
