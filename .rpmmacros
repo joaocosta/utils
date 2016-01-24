@@ -1,6 +1,6 @@
 %signature gpg
 %_gpg_path $HOME/.gnupg
-%_gpg_name Builder (Zonalivre RPM Repository) <joaocosta@zonalivre.org>
+%_gpg_name Builder (Zonalivre RPM Repository) <packages@zonalivre.org>
 %_gpg_bin /usr/bin/gpg
-%packager João Costa <joaocosta@zonalivre.org>
+%packager Builder <packages@zonalivre.org>
 %_topdir $HOME/rpmbuild
