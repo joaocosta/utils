@@ -33,9 +33,9 @@ use Pod::Usage;
 use File::Slurp;
 
 my $word = shift or pod2usage();
-my @dict = read_file("/usr/share/dict/words", chomp => 1);
+my @dict = read_file("/home/joao/words", chomp => 1);
 
-my $word_index = binary_search(lc($word), \@dict, 0, scalar(@dict)-1);
+my $word_index = binary_search($word);
 
 if (defined($word_index)) {
     print "Word '$word' occurs at index $word_index\n";
@@ -43,19 +43,46 @@ if (defined($word_index)) {
     print "Word '$word' not found\n";
 }
 
-
 sub binary_search {
+    my ($word) = @_;
+
+    return _binary_search_recursive(lc($word), \@dict, 0, scalar(@dict)-1);
+    return _binary_search(lc($word), \@dict);
+}
+
+sub _binary_search {
+    my ($word, $dict) = @_;
+    my ($min, $max) = (0, scalar(@$dict)-1);
+
+
+    while ($min <= $max) {
+        my $mid = int(($max+$min)/2);
+        print "$min\t$mid\t$max\tmid word is $dict->[$mid]\n";
+
+        if ($word gt lc($dict->[$mid])) {
+            $min = $mid+1;
+        } elsif ($word lt lc($dict->[$mid])) {
+            $max=$mid-1;
+        } else {
+            return $mid;
+        }
+    }
+
+    return;
+}
+
+sub _binary_search_recursive {
     my ($word, $dict, $min, $max) = @_;
 
-    my $mid = $min + (int(($max-$min)/2)+1);
+    my $mid = int(($max+$min)/2);
 
     print "$min\t$mid\t$max\tmid word is $dict->[$mid]\n";
-    return if ($min == $max);
+    return if ($min > $max);
 
     if ($word gt lc($dict->[$mid])) {
-        return binary_search($word, $dict, $mid+1, $max);
+        return _binary_search_recursive($word, $dict, $mid+1, $max);
     } elsif ($word lt lc($dict->[$mid])) {
-        return binary_search($word, $dict, $min, $mid-1);
+        return _binary_search_recursive($word, $dict, $min, $mid-1);
     } else {
         return $mid;
     }
