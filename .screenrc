@@ -14,3 +14,6 @@ hardstatus string "%-w%{= BW}%50>%n %t%{-}%+w%<"
 # Don't block command output if the terminal stops responding
 # (like if the ssh connection times out for example).
 nonblock on
+
+# From https://stackoverflow.com/questions/113427/how-to-clear-the-scrollback-in-the-screen-command
+bind 'l' eval "scrollback 0" "scrollback 25000"
