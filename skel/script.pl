@@ -29,6 +29,8 @@ Joao Costa - L<http://zonalivre.org/>
 
 use strict;
 use warnings;
-use Pod::Usage;
+use Getopt::Long;
 
-my $arg = shift or pod2usage();
+GetOptions(
+    "help"      => sub { Getopt::Long::HelpMessage() },
+) or Getopt::Long::HelpMessage(2);
