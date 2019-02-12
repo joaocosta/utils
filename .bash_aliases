@@ -3,7 +3,7 @@ alias docker-run-ssh-agent='docker run --rm -ti -v $(dirname $SSH_AUTH_SOCK):$(d
 alias docker-images-remove-dangling='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 alias docker-images-pull-all='for i in $(docker images --filter "dangling=false" --format "{{.Repository}}"); do echo $i && docker pull $i; done'
 alias g='googler'
-alias fx-shell='touch $HOME/fx-shell.bash_history;docker run -ti --env http_proxy --env https_proxy --rm --link fxdatafeed:fxdatafeed --link fxdataaccounts:fxdataaccounts --link smtp:smtp --link signal-scan-redis:signal-scan-redis -v $HOME/fx/cfg:/etc/fxtrader -v $HOME/fx-shell.bash_history:/root/.bash_history -v ~/src:/src -h fx-shell fxtrader/finance-hostedtrader bash'
+alias fx-shell='touch $HOME/fx-shell.bash_history;docker run -ti --env http_proxy --env https_proxy --rm --link fxdatafeed:fxdatafeed --link smtp:smtp --link signal-scan-redis:signal-scan-redis -v $HOME/fx/cfg:/etc/fxtrader -v $HOME/fx-shell.bash_history:/root/.bash_history -v ~/src:/src -h fx-shell fxtrader/finance-hostedtrader bash'
 alias fx-db='docker run -it --rm --link fxdatafeed:mysql mariadb sh -c '"'"'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -ufxdatafeed -pfxdatafeed fxdatafeed'"'"''
 alias fx-db-root='docker run -it --rm --link fxdatafeed:mysql mariadb sh -c '"'"'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -proot fxdatafeed'"'"''
 alias fx-signal-redis='docker run -it --link signal-scan-redis:redis --rm redis redis-cli -h redis -p 6379'

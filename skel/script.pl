@@ -26,17 +26,22 @@ Joao Costa - L<http://zonalivre.org/>
 =cut
 
 
-
 use strict;
 use warnings;
 use Getopt::Long;
-use Pod::Usage;
 
-my ($help, $man) = (0, 0);
+my $options = {
+    verbose     => 0,
+    optionA     => "Avalue",
+};
+
 GetOptions(
-            "help"  => \$help,
-            "man"   => \$man,
-          ) or die("Error in command line arguments\n");
+    $options,
+    "help"      => sub { Getopt::Long::HelpMessage() },
+    "verbose",
+    "optionA=s"
+) or Getopt::Long::HelpMessage(2);
 
-pod2usage(0)                if ($help);
-pod2usage( -verbose => 2)   if ($man);
+foreach my $option (sort keys %$options){
+    print "$option\t= $options->{$option}\n";
+}
