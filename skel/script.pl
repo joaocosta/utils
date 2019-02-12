@@ -6,7 +6,7 @@ script.pl
 
 =head1 SYNOPSIS
 
-    script.pl ARG
+    script.pl [--help]
 
 =head1 DESCRIPTION
 
@@ -29,6 +29,14 @@ Joao Costa - L<http://zonalivre.org/>
 
 use strict;
 use warnings;
+use Getopt::Long;
 use Pod::Usage;
 
-my $arg = shift or pod2usage();
+my ($help, $man) = (0, 0);
+GetOptions(
+            "help"  => \$help,
+            "man"   => \$man,
+          ) or die("Error in command line arguments\n");
+
+pod2usage(0)                if ($help);
+pod2usage( -verbose => 2)   if ($man);
