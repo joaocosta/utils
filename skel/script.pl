@@ -28,6 +28,7 @@ Joao Costa - L<http://zonalivre.org/>
 
 use strict;
 use warnings;
+use Log::Log4perl;
 use Getopt::Long;
 
 my $options = {
@@ -41,6 +42,19 @@ GetOptions(
     "verbose",
     "optionA=s"
 ) or Getopt::Long::HelpMessage(2);
+
+my $log_level = $ENV{LOG_LEVEL} // 'INFO';
+# Initialize Logger
+my $log_conf = qq(
+log4perl rootLogger = $log_level, SCREEN
+log4perl.appender.SCREEN         = Log::Log4perl::Appender::Screen
+log4perl.appender.SCREEN.stderr  = 0
+log4perl.appender.SCREEN.layout  = Log::Log4perl::Layout::PatternLayout
+log4perl.appender.SCREEN.layout.ConversionPattern = \%d{ISO8601} \%m \%n
+);
+
+Log::Log4perl::init(\$log_conf);
+my $l = Log::Log4perl->get_logger();
 
 foreach my $option (sort keys %$options){
     print "$option\t= $options->{$option}\n";
