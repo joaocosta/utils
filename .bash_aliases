@@ -4,7 +4,7 @@ alias docker-images-remove-dangling='docker rmi $(docker images --filter "dangli
 alias docker-images-pull-all='for i in $(docker images --filter "dangling=false" --format "{{.Repository}}"); do echo $i && docker pull $i; done'
 alias g='googler'
 alias node-shell='touch $HOME/.bash_history.node-shell;docker run -ti --env http_proxy --env https_proxy --rm -v $HOME/.bash_history.node-shell:/root/.bash_history -v ~/src:/src -h nodejs -p 3000:3000 node bash'
-alias fx-shell='touch $HOME/fx-shell.bash_history;docker run -ti --env http_proxy --env https_proxy --rm --link fxdatafeed:fxdatafeed --link smtp:smtp -v $HOME/fx/cfg:/etc/fxtrader -v $HOME/fx-shell.bash_history:/root/.bash_history -v ~/src:/src -h fx-shell fxtrader/finance-hostedtrader bash'
+alias fx-shell='touch $HOME/fx-shell.bash_history;docker run -ti --env http_proxy --env https_proxy --env "PATH=/src/Finance-HostedTrader/bin:/root/Finance-HostedTrader/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" --env "PERL5LIB=/src/Finance-HostedTrader/lib:/root/Finance-HostedTrader/lib" --rm --link fxdatafeed:fxdatafeed --link smtp:smtp -v $HOME/fx/cfg:/etc/fxtrader -v $HOME/fx-shell.bash_history:/root/.bash_history -v ~/src:/src -h fx-shell fxtrader/finance-hostedtrader bash'
 alias fx-db='docker run -it --rm --link fxdatafeed:mysql mariadb sh -c '"'"'exec mysql -A -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -ufxdatafeed -pfxdatafeed fxdatafeed'"'"''
 alias fx-db-root='docker run -it --rm --link fxdatafeed:mysql mariadb sh -c '"'"'exec mysql -A -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -proot fxdatafeed'"'"''
 alias fx-signal-redis='docker run -it --link signal-scan-redis:redis --rm redis redis-cli -h redis -p 6379'
