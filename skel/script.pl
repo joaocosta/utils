@@ -31,16 +31,21 @@ use warnings;
 use Log::Log4perl;
 use Getopt::Long;
 
+my @list;
 my $options = {
-    verbose     => 0,
-    optionA     => "Avalue",
+    verbose         => 0,
+    optionString    => "A String value",
+    optionNumber    => 10,
+    optionList      => \@list,
 };
 
 GetOptions(
     $options,
     "help"      => sub { Getopt::Long::HelpMessage() },
     "verbose",
-    "optionA=s"
+    "optionString=s",
+    "optionNumber=i",
+    "optionList=s@",
 ) or Getopt::Long::HelpMessage(2);
 
 my $log_level = $ENV{LOG_LEVEL} // 'INFO';
