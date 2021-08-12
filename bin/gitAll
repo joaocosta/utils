@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -euo pipefail
+
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+command="$*"
+
+for f in $PWD/*;
+do
+    [ -d "$f"/.git ] && echo && printf "$RED[$command $f]$NC\n" && cd "$f" && git $command
+done
