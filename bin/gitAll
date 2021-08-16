@@ -2,12 +2,13 @@
 
 set -euo pipefail
 
-RED='\033[0;31m'
+BLUE='\033[0;31m'
+BLUE='\u001b[34m'
 NC='\033[0m' # No Color
 
 command="$*"
 
 for f in $PWD/*;
 do
-    [ -d "$f"/.git ] && echo && printf "$RED[$command $f]$NC\n" && cd "$f" && git $command
+    [ -d "$f"/.git ] && echo && printf "$BLUE[$command $f]$NC\n" && cd "$f" && git $command
 done
