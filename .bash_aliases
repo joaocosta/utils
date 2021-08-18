@@ -1,7 +1,7 @@
 alias docker-remove-exited='docker rm $(docker ps -f status=exited -q)'
 alias docker-run-ssh-agent='docker run --rm -ti -v $(dirname $SSH_AUTH_SOCK):$(dirname $SSH_AUTH_SOCK) -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK'
 alias docker-images-remove-dangling='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
-alias docker-images-pull-all='for i in $(docker images --filter "dangling=false" --format "{{.Repository}}"); do echo $i && docker pull $i; done'
+alias docker-images-pull-all='for i in $(docker images --filter "dangling=false" --format "{{.Repository}}"); do echo && printf "\u001b[34m[${i}]\033[0m\n" && docker pull $i; done'
 alias g='googler'
 alias node-shell='touch $HOME/.bash_history.node-shell;docker run -ti --env http_proxy --env https_proxy --rm -v $HOME/.bash_history.node-shell:/root/.bash_history -v ~/src:/src -h nodejs -p 3000:3000 node bash'
 alias fx-shell='touch $HOME/.fx-shell.bash_history;docker run -ti --env http_proxy --env https_proxy --env "PATH=/src/Finance-HostedTrader/bin:/root/Finance-HostedTrader/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" --env "PERL5LIB=/src/Finance-HostedTrader/lib:/root/Finance-HostedTrader/lib" --rm --link fxdatafeed:fxdatafeed --link smtp:smtp -v $HOME/fx/cfg:/etc/fxtrader -v $HOME/.fx-shell.bash_history:/root/.bash_history -v ~/src:/src -h fx-shell fxtrader/finance-hostedtrader bash'
