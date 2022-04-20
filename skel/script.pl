@@ -55,7 +55,7 @@ log4perl rootLogger = $log_level, SCREEN
 log4perl.appender.SCREEN         = Log::Log4perl::Appender::Screen
 log4perl.appender.SCREEN.stderr  = 0
 log4perl.appender.SCREEN.layout  = Log::Log4perl::Layout::PatternLayout
-log4perl.appender.SCREEN.layout.ConversionPattern = \%d{ISO8601} \%m \%n
+log4perl.appender.SCREEN.layout.ConversionPattern = \%d{yyyy-MM-dd HH:mm:ss,S Z} \%m \%n
 );
 
 Log::Log4perl::init(\$log_conf);
