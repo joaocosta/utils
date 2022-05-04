@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+=encoding utf8
+
 =head1 NAME
 
 script.pl
@@ -19,7 +21,7 @@ License. See L<https://opensource.org/licenses/MIT>.
 
 =head1 AUTHOR
 
-Joao Costa - L<http://zonalivre.org/>
+João Costa - L<http://zonalivre.org/>
 
 =head1 SEE ALSO
 
@@ -32,21 +34,24 @@ use Log::Log4perl;
 use Getopt::Long;
 
 my @list;
-my $options = {
+my %options = (
     verbose         => 0,
     optionString    => "A String value",
     optionNumber    => 10,
     optionList      => \@list,
-};
+);
 
 GetOptions(
-    $options,
+    \%options,
     "help"      => sub { Getopt::Long::HelpMessage() },
     "verbose",
+    "mandatoryOption=s",
     "optionString=s",
     "optionNumber=i",
     "optionList=s@",
 ) or Getopt::Long::HelpMessage(2);
+
+warn("Mandatory option `mandatoryOption` not provided\n") && GetOpt::Long::HelpMessage(1) unless ($options{mandatoryOption});
 
 my $log_level = $ENV{LOG_LEVEL} // 'INFO';
 # Initialize Logger
@@ -61,6 +66,6 @@ log4perl.appender.SCREEN.layout.ConversionPattern = \%d{yyyy-MM-dd HH:mm:ss,S Z}
 Log::Log4perl::init(\$log_conf);
 my $l = Log::Log4perl->get_logger();
 
-foreach my $option (sort keys %$options){
-    print "$option\t= $options->{$option}\n";
+foreach my $option (sort keys %options){
+    print "$option\t= $options{$option}\n";
 }
