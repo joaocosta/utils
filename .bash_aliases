@@ -16,3 +16,5 @@ alias ..2="cd ../.."
 alias ..3="cd ../../.."
 alias ..4="cd ../../../.."
 alias ..5="cd ../../../../.."
+
+alias when_shutdown='date -d @$(echo $(grep USEC /run/systemd/shutdown/scheduled | cut -f 2 -d =) / 1000000 | bc)'
